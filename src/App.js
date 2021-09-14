@@ -7,6 +7,7 @@ import { Page1DetalB } from "./Page1DetalB";
 import { Page2 } from "./Page2";
 
 import "./styles.css";
+import { Router } from "./router/Router";
 
 export default function App() {
   return (
@@ -18,33 +19,7 @@ export default function App() {
         <br />
         <Link to="/Page2">Page2</Link>
       </div>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route
-          path="/page1"
-          render={({ match: { url } }) => (
-            <Switch>
-              {console.log(url)}
-              <Route exact path={url}>
-                <Page1 />
-              </Route>
-              {/* detalAはpage1配下である事が間違いない */}
-              <Route path={`${url}/detailA`}>
-                <Page1DetalA />
-              </Route>
-              {/* detalBはpage1の表記をミスした場合別のページ配下になってしまう */}
-              <Route path="/page1/detailB">
-                <Page1DetalB />
-              </Route>
-            </Switch>
-          )}
-        />
-        <Route path="/page2">
-          <Page2 />
-        </Route>
-      </Switch>
+      <Router />
     </BrowserRouter>
   );
 }
